@@ -3,24 +3,19 @@ const quoteDisplayElement = document.getElementById('quoteDisplay')
 
 function getRandomQuote() {
     return fetch(RANDOM_QUOTE_API_URL)
-        .then(response => response.json())
-        .then(data => data.content)
-}
-
-async function renderNewQuote() {
+      .then(response => response.json())
+      .then(data => data.content)
+  }
+  
+  async function renderNewQuote() {
     const quote = await getRandomQuote()
-    quoteDisplayElement.innerHTML = quote
+    quoteDisplayElement.innerHTML = ''
     quote.split('').forEach(character => {
-        const characterSpan = document.createElement('span')
-        characterSpan.innerText = character
-        quoteDisplayElement.appendChild(characterSpan)
-      })
-}
-
-function appendJSON() {
-    const fs = require('fs')
-    const data = fs.readFileSync('data.json')
-}
+      const characterSpan = document.createElement('span')
+      characterSpan.innerText = character
+      quoteDisplayElement.appendChild(characterSpan)
+    })
+  }
 
 
 
