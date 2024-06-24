@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Features</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
     <div class="quote-display" id="quoteDisplay"></div>
     <textarea class="user-input" id="userInput" autofocus></textarea>
+    <script>
+        const RANDOM_QUOTE_API_URL = 'http://api.quotable.io/random'
+        const quoteDisplayElement = document.getElementById('quoteDisplay')
+        const server = 'http://localhost:3000'
+        
+        function getRandomQuote() {
+            return fetch(RANDOM_QUOTE_API_URL)
+                .then(response => response.json())
+                .then(data => data.content)
+        }
+        
+        async function renderNewQuote() {
+            const quote = await getRandomQuote()
+            quoteDisplayElement.innerHTML = ''
+            quote.split('').forEach(character => {
+                const characterSpan = document.createElement('span')
+                characterSpan.innerText = character
+                quoteDisplayElement.appendChild(characterSpan)
+              })
+        }
+        
+        renderNewQuote()
+    </script>
 </body>
 </html>
